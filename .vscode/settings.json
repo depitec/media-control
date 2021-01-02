@@ -1,0 +1,4 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "python.pythonPath": "/Users/Jan/.pyenv/versions/3.9.1/bin/python"
+}
