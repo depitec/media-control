@@ -4,3 +4,19 @@
 
 /* purgecss end ignore */
 @tailwind utilities;
+
+:root {
+	--height-header: 100px;
+}
+
+.h-header {
+	height: var(--height-header);
+}
+
+.h-content {
+	height: calc(100vh - var(--height-header));
+}
+
+.h-min {
+	height: min-content;
+}
