@@ -2,21 +2,18 @@ import logging
 import pigpio as gpio
 from itertools import count
 from pypjlink import Projector
-from database import Helper
-import sqlite3
+from database import Database
 
-db = sqlite3.connect('/home/pi/raspi-room-control/control/control.db')
-helper = Helper(db)
 log = logging.getLogger('control-main')
-
 
 class BeamerControl:
     __ids = count(1)
 
     def __init__(self, gpio_on, gpio_off, port=4352, timeout=10):
+        self.db = Database()
         self.id = next(self.__ids)
 
-        self.ip = helper.get('ip-{}'.format(self.id))
+        self.ip = self.db.get('ip-{}'.format(self.id))
         try:
             self.projector = Projector.from_address(
                 self.ip, 4352, timeout=timeout)
@@ -25,7 +22,7 @@ class BeamerControl:
                 "[error] can't connect with projector {}, ip: {}".format(self.id, self.ip))
             self.projector = None
 
-        self.room_name = helper.get('name-{}'.format(self.id))
+        self.room_name = self.db.get('name-{}'.format(self.id))
 
         self.PI = gpio.pi()
         self.PI.set_mode(gpio_on, gpio.INPUT)

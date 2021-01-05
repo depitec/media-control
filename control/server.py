@@ -4,14 +4,10 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from waitress import serve
 import subprocess
-from database import Helper
+from database import Database
 import logging
 
-import sqlite3
-
-db = sqlite3.connect(
-    '/home/pi/raspi-room-control/control/control.db', check_same_thread=False)
-helper = Helper(db)
+db = Database()
 
 app = Flask(__name__)
 CORS(app)
@@ -28,7 +24,7 @@ def home():
 
 
 def serve_props():
-    kv_tuple = helper.get_all()
+    kv_tuple = db.get_all()
     kv = {}
     [kv.update({k: v}) for k, v in kv_tuple]
 
@@ -42,7 +38,7 @@ def restart_main_loop():
 
 def save_props(data):
     for k in data:
-        helper.set(k, data[k])
+        db.set(k, data[k])
     log.info('saved data: {}'.format(data))
     restart_main_loop()
     return jsonify(data)
