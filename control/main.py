@@ -5,7 +5,6 @@ from screencontrol import ScreenControl
 from beamercontrol import BeamerControl
 import signal
 import sys
-from threading import Thread
 import logging
 
 
