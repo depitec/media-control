@@ -1,5 +1,4 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "python.pythonPath": "/home/pi/.pyenv/versions/3.9.1/bin/python",
   "python.analysis.typeCheckingMode": "off"
 }
