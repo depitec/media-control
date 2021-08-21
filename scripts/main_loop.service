@@ -1,0 +1,8 @@
+[Unit]
+Description=Main Loop für die Mediensteuerung
+
+[Service]
+ExecStart=/home/pi/raspi-media-control/control/main.py
+
+[Install]
+WantedBy=multi-user.target
