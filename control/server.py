@@ -33,7 +33,7 @@ def serve_props():
 
 def restart_main_loop():
     subprocess.call(
-        ['sh', '/home/pi/raspi-room-control/control/restart_main.sh'])
+        ['sh', '/home/pi/raspi-room-control/scripts/restart_main.sh'])
 
 
 def save_props(data):
