@@ -1,2 +1,1 @@
-# depitec
-monorepo for depitec mediensysteme
+# Depitec Raspberry Mediensteuerung
