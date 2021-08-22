@@ -1,11 +1,14 @@
 #! /home/pi/.pyenv/shims/python
 
 from time import sleep
+from pathlib import Path
 from screencontrol import ScreenControl
 from beamercontrol import BeamerControl
 import signal
 import sys
 import logging
+
+Path("/home/pi/logs").mkdir(parents=True, exist_ok=True)
 
 
 def main_signal_handler(sig, frame):
