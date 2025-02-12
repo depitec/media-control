@@ -16,10 +16,14 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "pypjlink2" },
+    { name = "rpi-gpio" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "pypjlink2", specifier = ">=1.2.2" }]
+requires-dist = [
+    { name = "pypjlink2", specifier = ">=1.2.2" },
+    { name = "rpi-gpio", specifier = ">=0.7.1" },
+]
 
 [[package]]
 name = "pypjlink2"
@@ -32,3 +36,9 @@ sdist = { url = "https://files.pythonhosted.org/packages/47/d7/b68036dba4cc23fac
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fb/97/ec46e5b07144be1035b2cf035da207049412f391e623687f9d3700fe99dc/pypjlink2-1.2.2-py3-none-any.whl", hash = "sha256:b88fe0e53c5ca94b435a18c18f93f4c4f264e2a5872d5b83687ae703590dd841", size = 12238 },
 ]
+
+[[package]]
+name = "rpi-gpio"
+version = "0.7.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/c4/0f/10b524a12b3445af1c607c27b2f5ed122ef55756e29942900e5c950735f2/RPi.GPIO-0.7.1.tar.gz", hash = "sha256:cd61c4b03c37b62bba4a5acfea9862749c33c618e0295e7e90aa4713fb373b70", size = 29090 }
