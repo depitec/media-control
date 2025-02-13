@@ -11,7 +11,7 @@ wheels = [
 ]
 
 [[package]]
-name = "media-control"
+name = "dpt-media-control"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
