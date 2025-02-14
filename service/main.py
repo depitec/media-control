@@ -1,4 +1,4 @@
-from .PinController import PinController
+from PinController import PinController
 
 
 if __name__ == "__main__":
