@@ -37,18 +37,3 @@ class Pin:
         self.is_blocked = is_blocked
         self.trigger_type = trigger_type
         self.trigger_hold_time = trigger_hold_time
-
-    def change_trigger_type(self, trigger_type: PinTriggerType):
-        if trigger_type == self.trigger_type:
-            return
-        self.trigger_type = trigger_type
-
-    def change_trigger_hold_time(self, trigger_hold_time: int):
-        if trigger_hold_time == self.trigger_hold_time:
-            return
-        self.trigger_hold_time = trigger_hold_time
-
-    def change_blocked_state(self, is_blocked: bool):
-        if is_blocked == self.is_blocked:
-            return
-        self.is_blocked = is_blocked
