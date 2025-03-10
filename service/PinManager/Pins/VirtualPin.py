@@ -25,21 +25,21 @@ class VirtualPin(Pin):
     def set_pin_adress(self, pin_adress: str):
         self.pin_adress = pin_adress
 
-    def activate(self, context: TriggerContext):
+    def activate(self, trigger_context: TriggerContext):
         match self.virtual_pin_method_name:
             case "pjlink_power_on":
-                self._trigger_pjlink_power_on(context)
+                self._trigger_pjlink_power_on(trigger_context)
 
             case "pjlink_power_off":
-                self._trigger_pjlink_power_off(context)
+                self._trigger_pjlink_power_off(trigger_context)
 
     # --- Trigger Methods ---
-    def _trigger_pjlink_power_on(self, context: TriggerContext):
+    def _trigger_pjlink_power_on(self, trigger_context: TriggerContext):
         with Projector.from_address(self.pin_adress) as projector:
             projector.authenticate()
             projector.set_power("on")
 
-    def _trigger_pjlink_power_off(self, context: TriggerContext):
+    def _trigger_pjlink_power_off(self, trigger_context: TriggerContext):
         with Projector.from_address(self.pin_adress) as projector:
             projector.authenticate()
             projector.set_power("off")

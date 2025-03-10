@@ -35,14 +35,14 @@ class OutputPin(Pin):
         self.deactivate()
         self.trigger_end()
 
-    def activate(self, context: TriggerContext):
+    def activate(self, trigger_context: TriggerContext):
         match self.trigger_method_name:
             case "pulse":
                 self._trigger_pulse()
             case "hold":
                 self._trigger_hold()
             case "while_input":
-                self._trigger_while_input(context)
+                self._trigger_while_input(trigger_context)
 
     def deactivate(self):
         GPIO.output(self._gpio_pin, GPIO.LOW)
@@ -62,8 +62,8 @@ class OutputPin(Pin):
         sleep(self.hold_time)
         GPIO.output(self._gpio_pin, GPIO.LOW)
 
-    def _trigger_while_input(self, context: TriggerContext):
-        [trigger_pin, _] = context
+    def _trigger_while_input(self, trigger_context: TriggerContext):
+        [trigger_pin, _] = trigger_context
 
         GPIO.output(self._gpio_pin, GPIO.HIGH)
 

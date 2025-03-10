@@ -97,7 +97,7 @@ class Pin:
     def deactivate(self):
         self.state = "inactive"
 
-    def trigger(self, context: TriggerContext):
+    def trigger(self, trigger_context: TriggerContext):
         # Pin got triggered
         self.trigger_start()
         # Check if pin is blocked and return if it is
@@ -108,7 +108,7 @@ class Pin:
         # Unblock pins that should be unblocked
         self.unblock_pins(self.pins_to_unblock)
         # Activate Pin functionality
-        self.activate(context)
+        self.activate(trigger_context)
         # Deactivate Pin functionality
         self.deactivate()
         # Unblock pins that where blocked
