@@ -6,6 +6,7 @@ from datetime import datetime
 
 
 if TYPE_CHECKING:
+    from ..PinManager import TriggerContext
     from .OutputPin import OutputPin
     from .VirtualPin import VirtualPin
 
@@ -29,7 +30,7 @@ class InputPin(Pin):
     def remove_trigger_pin(self, pin: TriggerablePins):
         self.trigger_pins.remove(pin)
 
-    def activate(self):
+    def activate(self, trigger_context: TriggerContext):
         activate_time = datetime.timestamp(datetime.now())
         context = (self, activate_time)
 
