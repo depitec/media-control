@@ -17,12 +17,12 @@ class PinManager:
     pins: Dict[str, Union[InputPin, VirtualPin, OutputPin]]
 
     def __init__(self):
-        self.impulse_length = 0.1
         self.pins = {}
 
     def has_pin_been_setup(self, pin_number: int):
         # check if the gpio_pin has been setup
-        return GPIO.gpio_function(pin_number) != GPIO.UNKNOWN
+        pin_function = GPIO.gpio_function(pin_number)
+        return pin_function != GPIO.UNKNOWN
 
     @overload
     def register_pin(self, pin_number: int, pin_type: Literal["input"]) -> InputPin: ...
