@@ -88,6 +88,14 @@ class PinManager:
         if pin.pin_type == "virtual":
             del self.pins[pin.name]
 
+    def get_pin_by_gpio(
+        self, gpio_pin: int
+    ) -> InputPin | OutputPin | VirtualPin | None:
+        for pin in self.pins.values():
+            if pin.gpio_pin == gpio_pin:
+                return pin
+        return None
+
     def get_input_pins(self):
         input_pins = []
         for pin in self.pins.values():
