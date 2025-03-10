@@ -1,6 +1,6 @@
 from __future__ import annotations
 from datetime import datetime
-from typing import Dict, Union, TYPE_CHECKING, cast, Tuple
+from typing import Dict, Literal, Union, TYPE_CHECKING, cast, Tuple, overload
 import RPi.GPIO as GPIO
 from .Pins import InputPin, OutputPin, VirtualPin
 
@@ -24,29 +24,56 @@ class PinManager:
         # check if the gpio_pin has been setup
         return GPIO.gpio_function(pin_number) != GPIO.UNKNOWN
 
-    def register_pin(self, pin_number: int, pin_type: PinType):
-        if self.has_pin_been_setup(pin_number):
-            return
+    @overload
+    def register_pin(self, pin_number: int, pin_type: Literal["input"]) -> InputPin: ...
+
+    @overload
+    def register_pin(
+        self, pin_number: int, pin_type: Literal["output"]
+    ) -> OutputPin: ...
+
+    @overload
+    def register_pin(
+        self, pin_number: int, pin_type: Literal["virtual"]
+    ) -> VirtualPin: ...
+
+    def register_pin(
+        self, pin_number: int, pin_type: PinType
+    ) -> InputPin | OutputPin | VirtualPin:
+        # if self.has_pin_been_setup(pin_number):
+        #     return
 
         if pin_type == "input":
+            print(f"registering input pin {pin_number}")
             GPIO.setup(pin_number, GPIO.IN)
             input_pin_name = f"I#{pin_number}"
             new_input_pin: InputPin = InputPin(input_pin_name, pin_number)
             self.pins[input_pin_name] = new_input_pin
             GPIO.add_event_detect(
-                pin_number, GPIO.RISING, callback=self.event_trigger(new_input_pin)
+                pin_number,
+                GPIO.RISING,
+                callback=self.event_trigger(new_input_pin),
+                bouncetime=200,
             )
 
+            return new_input_pin
+
         if pin_type == "output":
+            print(f"registering output pin {pin_number}")
             GPIO.setup(pin_number, GPIO.OUT)
             output_pin_name = f"O#{pin_number}"
             new_output_pin: OutputPin = OutputPin(output_pin_name, pin_number)
             self.pins[output_pin_name] = new_output_pin
 
+            return new_output_pin
+
         if pin_type == "virtual":
+            print(f"registering virtual pin {pin_number}")
             virtual_pin_name = f"V#{pin_number}"
             new_virtual_pin: VirtualPin = VirtualPin(virtual_pin_name)
             self.pins[virtual_pin_name] = new_virtual_pin
+
+            return new_virtual_pin
 
     def unregister_pin(self, pin: InputPin | OutputPin):
         if pin.pin_type == "input":
